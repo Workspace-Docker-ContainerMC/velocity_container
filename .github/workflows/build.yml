@@ -8,6 +8,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build the Docker image
-        run: docker build --tag docker.io/workspaceDockerMC/el9-java17-velocity:latest .
+        run: docker build --tag docker.io/workspacedockermc/el9-java17-velocity:latest .
       - name: Push the Docker image
-        run: docker login -u workspaceDockerMC -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/workspaceDockerMC/el9-java17-velocity:latest
+        run: docker login -u workspacedockermc -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/workspacedockermc/el9-java17-velocity:latest
