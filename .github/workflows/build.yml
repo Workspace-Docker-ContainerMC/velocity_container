@@ -1,0 +1,13 @@
+name: workflow_02
+on: [repository_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Triggering Wokflow 2"
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build the Docker image
+        run: docker build --tag docker.io/workspaceDockerMC/el9-java17-velocity:latest .
+      - name: Push the Docker image
+        run: docker login -u workspaceDockerMC -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/workspaceDockerMC/el9-java17-velocity:latest
