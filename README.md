@@ -36,7 +36,7 @@ docker run --detach --name=proxy --interactive \
     docker.io/workspacedockermc/el9-java17-velocity:latest
 ```
 
-Or use [this](https://github.com/WolfAURman/minecraft_containers/tree/master/compose-files) docker-composes files:
+Or use [this](https://github.com/Workspace-Docker-ContainerMC/compose-files) docker-composes files:
 ```
 docker-compose -f <NAME_DOCKER_COMPOSE_FILES> up -d
 ```
@@ -63,3 +63,4 @@ docker build -t docker.io/$USER/ubi9-graalvm17-velocity:latest .
 - [Red Hat](https://github.com/RedHatOfficial)
 - [GraalVM](https://github.com/graalvm)
 - [Docker](https://docker.com)
+- [PaperMC](https://github.com/PaperMC)
