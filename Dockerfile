@@ -18,7 +18,7 @@ RUN microdnf install -y binutils tzdata openssl wget ca-certificates fontconfig 
     && microdnf clean all \
     && mkdir /opt/graalvm-17
 
-RUN curl -L https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz | \
+RUN curl -L https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.13%2B11/OpenJDK17U-jdk_x64_linux_hotspot_17.0.13_11.tar.gz | \
     tar --strip-components 1 \
     --ungzip \
     --extract \
