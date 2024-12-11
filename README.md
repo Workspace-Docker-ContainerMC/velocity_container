@@ -1,7 +1,7 @@
 ## Docker container JDK with Velocity ##
 ### About container: ###
 
-This container is based on [ubi9-minimal](https://hub.docker.com/r/redhat/ubi9-minimal), and uses [graalvm-ce 17 JDK](https://www.graalvm.org).
+This container is based on [ubi9-minimal](https://hub.docker.com/r/redhat/ubi9-minimal), and uses [eclipse-temurin 17 JDK](https://adoptium.net/temurin/releases/).
 The container is built specifically for use as a minecraft proxy. [This issues](https://github.com/graalvm/container/issues/73) has been fixed in it.
 This allows you to fully use it as a server container without errors related to some plugins.
 
@@ -55,12 +55,13 @@ cd velocity_container
 
 Get started build
 ```bash
-docker build -t docker.io/$USER/ubi9-graalvm17-velocity:latest .
+docker build -t docker.io/$USER/el9-java17-velocity:latest .
 ```
 
 ## Contributer's & Credit's ##
 ### I express my gratitude to these projects: ###
 - [Red Hat](https://github.com/RedHatOfficial)
 - [GraalVM](https://github.com/graalvm)
+- [Adoptium](https://github.com/adoptium)
 - [Docker](https://docker.com)
 - [PaperMC](https://github.com/PaperMC)
