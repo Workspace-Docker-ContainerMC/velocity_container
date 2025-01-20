@@ -1,3 +1,4 @@
+
 ## Docker container JDK with Velocity ##
 ### About container: ###
 
@@ -9,9 +10,11 @@ All builds take place automatically without human intervention. If the [main rep
 
 ### About configuration: ###
 
-In ```entrypoint.sh``` the start [flags](https://docs.papermc.io/paper/aikars-flags) from Aikar's are specified. You can get them by following the link or on [this website](https://flags.sh/). ```entrypoint.sh``` it has one variable - ```MEMORYSIZE```, which indicates how much will be allocated memory to the server (in this case, velocity) in -Xms and -Xmx. It is located [here](https://github.com/Workspace-Docker-ContainerMC/velocity_container/blob/38fb67c3398978acd67b8e0778c950ba2b68749a/entrypoint.sh#L13).
+In ```entrypoint.sh```, the flags for launching are used with reference to [this](https://flags.sh/) website.
 
-**It is important!** If you limit the container's memory using ``--memory`` in the docker command, or ``memory`` in ``docker-compose``, keep in mind that you need to allocate memory with a margin. If you specified 1G in MEMORYSIZE, then you need to specify at least 2G for the docker container.If you specify less, the JVM uses all the RAM, and your process will be stopped by OOMKiller. Multiply your allocated memory number by 2-3. This will help to avoid problems with stopping the container.
+By default, containers are set to use 80% of the available RAM (using the parameters ```-XX:MaxRAMPercentage=80``` and ```-XX:MinRAMPercentage=80```). This percentage is based on the amount of RAM you specify when creating the container (via the ```--memory``` parameter or the ```memory``` setting in the ```deploy``` section of ```docker-compose```). This helps prevent RAM overflow. By default, these parameters are set to ```MaxRAMPercentage=25``` and ```MinRAMPercentage=50```, which does not allow for efficient use of the container's memory. For this reason, these parameters are explicitly defined in the ```entrypoint.sh``` file. Example: You specified in ```memory``` 1GB, Java will get 824MB.
+
+Why is this better than specifying a variable? It simplifies the launch process and eliminates concerns about allocating too much or too little RAM. Java will automatically determine how much memory it can use based on the amount of memory allocated to the container.
 
 **If you need to change the JDK or flags,** you need to create the container yourself. You can find out how to do this in the how to [build section](https://github.com/Workspace-Docker-ContainerMC/velocity_container?tab=readme-ov-file#build).
 
@@ -30,9 +33,8 @@ docker pull workspacedockermc/el9-java17-velocity:latest
 You can run container with the docker command:
 ```
 docker run --detach --name=proxy --interactive \
-    --tty --restart=unless-stopped --env MEMORYSIZE=2G \
-    --publish 25565:25565/tcp --cpus=2 --memory 5G \
-    --volume /home/$USER/server/proxy:/proxy:rw,Z \
+    --tty --restart=unless-stopped --publish 25565:25565/tcp \
+    --cpus=2 --memory 5G --volume /home/$USER/server/proxy:/proxy:rw,Z \
     docker.io/workspacedockermc/el9-java17-velocity:latest
 ```
 

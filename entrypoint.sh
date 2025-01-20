@@ -10,7 +10,8 @@ set -e
     fi
 
     exec java \
-        -Xms$MEMORYSIZE -Xmx$MEMORYSIZE \
+        -XX:MaxRAMPercentage=80 \
+        -XX:MinRAMPercentage=80 \
         -XX:+UseG1GC \
         -XX:G1HeapRegionSize=4M \
         -XX:+UnlockExperimentalVMOptions \
